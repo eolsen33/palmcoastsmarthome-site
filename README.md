@@ -8,7 +8,7 @@ Converted from an Express/EJS app to a fully static **HTML / CSS / JS** site (no
 
 ```
 index.html          Single-page site (nav, hero, trust strip, services, gallery, contact)
-css/styles.css      Styles (brand palette: navy #2a5252 / orange #c8522a)
+css/styles.css      Styles (brand palette: navy #2a5252 / orange #bd4d28)
 js/main.js          Mobile nav, smooth scroll, AJAX contact form
 images/             Logo + work gallery (jpg + webp), grouped by category
 favicon.ico
