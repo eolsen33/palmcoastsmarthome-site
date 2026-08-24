@@ -1,0 +1,19 @@
+# --- Security headers (weekly-audit hardening 2026-08-24) ---
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# --- Never serve dotfiles (.DS_Store etc.) ---
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# --- No-cache HTML (Hostinger 7-day cache workaround) ---
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html?)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
