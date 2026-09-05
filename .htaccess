@@ -23,3 +23,11 @@ RewriteRule ^ https://www.palmcoastsmarthome.com%{REQUEST_URI} [R=301,L]
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
 </IfModule>
+
+# seo-kit: crawler files must never sit in a CDN edge — they change with every deploy
+<IfModule mod_headers.c>
+  <FilesMatch "^(robots\.txt|sitemap\.xml|llms\.txt)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+# /seo-kit
