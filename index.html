@@ -7,8 +7,8 @@
   <meta name="description" content="Licensed &amp; insured handyman and smart home services in Palm Coast, FL. Plumbing repairs, electrical work, carpentry, painting, furniture assembly, and general maintenance. No job too small — get a free quote today." />
   <link rel="canonical" href="https://www.palmcoastsmarthome.com/" />
 
-  <!-- Content Security Policy (static host): self + Google Fonts + Formsubmit form endpoint -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-ancestors 'self'" />
+  <!-- Content Security Policy (static host): self + Google Fonts + Formsubmit / Web3Forms form endpoints -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://formsubmit.co https://api.web3forms.com; form-action 'self' https://formsubmit.co https://api.web3forms.com; frame-ancestors 'self'" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -16,13 +16,13 @@
   <meta property="og:title" content="Palm Coast Smart Home and Handyman Services" />
   <meta property="og:description" content="Licensed &amp; insured handyman and smart home services in Palm Coast, FL. No job too small — every job done right." />
   <meta property="og:url" content="https://www.palmcoastsmarthome.com/" />
-  <meta property="og:image" content="https://www.palmcoastsmarthome.com/images/logo.png" />
+  <meta property="og:image" content="https://www.palmcoastsmarthome.com/images/og-image.jpg" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Palm Coast Smart Home and Handyman Services" />
   <meta name="twitter:description" content="Licensed &amp; insured handyman and smart home services in Palm Coast, FL. No job too small — every job done right." />
-  <meta name="twitter:image" content="https://www.palmcoastsmarthome.com/images/logo.png" />
+  <meta name="twitter:image" content="https://www.palmcoastsmarthome.com/images/og-image.jpg" />
 
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="/images/logo-icon.png" />
@@ -279,12 +279,13 @@
       <div class="contact-form-wrap">
         <div class="alert alert-success" id="form-success" hidden role="status">✅ Message sent! I'll be in touch soon.</div>
         <div class="alert alert-error" id="form-error" hidden role="alert">⚠️ Something went wrong. Please try again or call (386) 848-0879.</div>
-        <form id="contact-form" action="https://formsubmit.co/ajax/palmcoastsmarthome@gmail.com" method="POST" class="contact-form" novalidate>
+        <form id="contact-form" action="https://formsubmit.co/palmcoastsmarthome@gmail.com" method="POST" class="contact-form" novalidate>
           <input type="hidden" name="_subject" value="New Contact Form Submission" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
           <!-- Honeypot: real users never see or fill this. Bots that do are dropped. -->
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px;top:auto;width:1px;height:1px;overflow:hidden" />
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px;top:auto;width:1px;height:1px;overflow:hidden" />
           <div class="form-row">
             <div class="form-group">
               <label for="name">Name <span class="required">*</span></label>
@@ -325,6 +326,6 @@
     </div>
   </footer>
 
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js?v=20260921"></script>
 </body>
 </html>
