@@ -1,3 +1,33 @@
+// Form delivery — Formsubmit today, Web3Forms once the client's key arrives.
+const FORM = { endpoint: "https://formsubmit.co/ajax/palmcoastsmarthome@gmail.com", web3formsKey: "" }; // when the Web3Forms key arrives: set web3formsKey and the endpoint switches automatically
+
+// POSTs a form as JSON. Resolves only on a confirmed delivery — Formsubmit
+// answers 200 even when it drops a message, so the body is what counts.
+async function sendForm(form) {
+  const data = {};
+  new FormData(form).forEach((value, key) => {
+    data[key] = key in data ? data[key] + ', ' + value : value;
+  });
+  if (data._subject) data.subject = data._subject;
+  let url = FORM.endpoint;
+  if (FORM.web3formsKey) {
+    url = 'https://api.web3forms.com/submit';
+    data.access_key = FORM.web3formsKey;
+    Object.keys(data).forEach((key) => { if (key.charAt(0) === '_') delete data[key]; });
+  }
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(data),
+  });
+  let out = {};
+  try { out = await res.json(); } catch (err) { /* non-JSON reply fails below */ }
+  if (!res.ok || !(out.success === true || out.success === 'true')) {
+    throw new Error(out.message || 'Form submission failed');
+  }
+  return out;
+}
+
 // Set current year in footer
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -34,7 +64,8 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Contact form: submit via Formsubmit AJAX so the page never reloads.
+// Contact form: sent by sendForm() so the page never reloads and delivery is
+// confirmed; with JS off the form still posts to its action= (Formsubmit).
 const form = document.getElementById('contact-form');
 const successAlert = document.getElementById('form-success');
 const errorAlert = document.getElementById('form-error');
@@ -65,12 +96,7 @@ form?.addEventListener('submit', async (e) => {
   submitBtn.textContent = 'Sending…';
 
   try {
-    const res = await fetch(form.action, {
-      method: 'POST',
-      headers: { Accept: 'application/json' },
-      body: new FormData(form),
-    });
-    if (!res.ok) throw new Error('Bad response');
+    await sendForm(form);
     form.reset();
     showAlert(successAlert);
   } catch (err) {
